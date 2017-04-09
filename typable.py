@@ -24,10 +24,11 @@ def count_runs(test_string, hands):
             last_group = None
     return runs
 
-runs = count_runs(test_string, qwerty)
-if runs == 0:
+if len(test_string) <= 1:
+    runs = 0
     percent = 0
 else:
+    runs = count_runs(test_string, qwerty)
     percent = runs/(len(test_string)-1)
 
 print("runs: {:.0f}%".format(percent*100))
