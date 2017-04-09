@@ -10,16 +10,24 @@ qwerty = [set(chars.lower() + chars.upper()) for chars in qwerty]
 test_string = sys.argv[1]
 print("String to test:", repr(test_string))
 
-counts = [0 for _ in qwerty]
-for c in test_string:
-    for index, chars in enumerate(qwerty):
-        if c in chars:
-            counts[index] += 1
+def count_runs(test_string, hands):
+    runs = 0
+    last_group = None
+    for c in test_string:
+        for group, chars in enumerate(hands):
+            if c in chars:
+                if last_group == group:
+                    runs += 1
+                last_group = group
+                break
+        else:
+            last_group = None
+    return runs
 
-min_count = min(counts)
-max_count = max(counts)
-for count in counts:
-    print("hand: {:3.0f}% ({})".format(count/len(test_string)*100, count))
+runs = count_runs(test_string, qwerty)
+if runs == 0:
+    percent = 0
+else:
+    percent = runs/(len(test_string)-1)
 
-print()
-print("SCORE: {:.0f}%".format(100 - 100*(max_count-min_count)/len(test_string)))
+print("runs: {:.0f}%".format(percent*100))
