@@ -1,3 +1,8 @@
+# Counts the number of per-hand runs in a string
+#
+# aaaa - 3 runs
+# apap - 0 runs
+# aapa - 1 runs
 def count(test_string, hands):
     runs = 0
     last_group = None
@@ -12,6 +17,7 @@ def count(test_string, hands):
             last_group = None
     return runs
 
+# Runs/(character count - 1)
 def fraction(test_string, hands):
     if len(test_string) <= 1:
         fraction = 0
