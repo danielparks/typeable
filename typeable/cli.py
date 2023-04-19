@@ -34,7 +34,8 @@ def run_count(strings):
 @main.command()
 @click.argument('files', nargs=-1, type=click.File('r'))
 @click.option('--maximum-run-percent', '-m', type=click.IntRange(0, 100), default=50)
-def filter(files, maximum_run_percent=0.5):
+def filter(files, maximum_run_percent=50):
+    """Filter lines in files by typeability"""
     if not files:
         files = [sys.stdin]
     hands = querty()
